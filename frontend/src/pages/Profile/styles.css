@@ -1,0 +1,110 @@
+
+section {
+    display: flex;
+    justify-content: center;
+}
+
+section ul li {
+    list-style: none;
+}
+.cabecalho, .contaInf, .contaActions {
+    display: flex;
+}
+.cabecalho{
+    width: 560px ;
+    justify-content: space-between;
+    height:  43px;
+    background: #545353;
+
+    border-radius: 4px;
+}
+.cabecalho:hover{
+    cursor: pointer;
+}
+.contaInf {
+    
+
+    
+    align-items: center;
+}
+.contaInf p {
+    font-size: 20px;
+}
+.contaInf p:nth-child(1){
+    color:#FFFFFF;
+    margin-left: 22px;
+    margin-right: 30px;
+    width: auto;
+}
+
+.contaInf p:nth-child(3){
+    color:#9E9C9C;
+}
+
+.contaActions{
+    align-items: center;
+
+}
+
+.contaActions button {
+    margin-right: 10px;
+}
+
+.content{
+    width: 543px;
+    height: 90px;
+    margin-bottom: 55px;
+    margin-left: 8.5px;
+    background-color: #FDFDFD;
+    border-radius: 0 0 8px 8px;
+    transition: .5s;
+}
+
+.contentActive{
+    
+    height: 30px;
+}
+
+.contentActive table td{
+    opacity: 0;
+    transition: .2s;
+    height: 20px;
+}
+.contentActive table th{
+    transition: .2s;
+    height: 20px;
+}
+table {
+    width: 100%;
+    transition: .2s;
+}
+th:nth-child(2){
+    text-align: center;
+
+    
+}
+th, td {
+    height: 50px;
+    vertical-align: top;
+    text-indent: 5px;
+    width: 280px;
+    transition: .5s;
+}
+td {
+    color: #9E9C9C;
+    font-size: 16px;
+}
+td:nth-child(2){
+    text-align: center;
+    color: #A10000;
+    font-weight: bold;
+    
+}
+
+.situationActive svg{
+    color: green;
+}
+button{
+    background: transparent;
+    border: none;
+}

@@ -1,0 +1,141 @@
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #323232;
+    color: #fdfdfd;
+    height: 56px;
+}
+.header div {
+    display: flex;
+    justify-content: space-around;
+}
+.header div p {
+    margin-right: 10px;
+}
+
+.conteudo {
+    display: flex;
+    justify-content: space-evenly;
+
+    margin: 5% 0;
+}
+.formAdd  {
+    width: 50%;
+}
+form {
+    width: 60%;
+}
+.btnGroup{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3%;
+    width: 543px;
+    margin-left: 8.5px;
+}
+.btnGroup a {
+    width: 40%;
+}
+.btnCancelar{
+    background: transparent;
+    height: 39px;
+    border: 1px solid #B93434;
+    border-radius: 4px;
+    color: #B93434;
+    box-shadow: none;
+
+    width: 40%;
+    
+}
+
+.btnCancelar:hover{
+    background-color: #B93434;
+    box-shadow: 0 2px 2px rgb(138, 38, 38);
+    color: #FDFDFD;
+}
+.btnCancelar:active{
+    box-shadow: none;
+}
+
+.btnAdicionar{
+    width: 40%;
+    background: #17A100;
+    height: 39px;
+    border: 1px solid #17A100;
+    border-radius: 4px;
+    color: #F6F6F6;
+    box-shadow: 0 2px 2px rgb(33, 107, 20);
+    
+}
+
+.cabecalhoAddConta{
+    width: 560px ;
+    justify-content: space-between;
+    height:  50px;
+    background: #545353;
+    display: flex;
+    border-radius: 4px;
+    align-items: baseline;
+}
+.InfAddConta{
+    display: flex;
+    align-items: center;
+}
+.InfAddConta input:nth-child(1){
+    width: 30%;
+    height: 37px;
+    margin-top: 6.5px;
+    margin-left: 5px;
+    margin-right: 25px;
+    padding-left: 3px;
+    padding-right: 0;
+}
+.InfAddConta input:nth-child(3){
+    width: 30%;
+    height: 37px;
+    margin-top: 6.5px;
+}
+
+.contentAddConta {
+    width: 543px;
+    height: 120px;
+    margin-left: 8.5px;
+    background-color: #FDFDFD;
+    border-radius: 0 0 8px 8px;
+    transition: .5s;
+}
+th{
+    height: 50px;
+    vertical-align: top;
+    text-indent: 5px;
+    width: 280px;
+    transition: .5s;
+    font-size: 16px;
+   
+}
+th:nth-child(2){
+    text-align: center;
+
+}
+th:nth-child(1){
+    text-align: center;
+    
+
+}
+.detalhesAddConta{
+    display: flex;
+    justify-content: space-between;
+}
+.detalhesAddConta textarea {
+    border: 1px solid #545353;
+    border-radius: 4px;
+    margin-left: 2%;
+    width: 40%;
+    height: 60px;
+}
+.detalhesAddConta input {
+    border: 1px solid #545353;
+    width: 30%;
+    margin-right: 2%;
+    padding-left: 45px;
+}

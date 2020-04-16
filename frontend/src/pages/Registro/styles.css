@@ -1,0 +1,78 @@
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5%;
+
+}
+.container img {
+    width: 300px;
+    margin-left: 10%;
+}
+.content {
+    width: 30%;
+    
+}
+
+.content form button {
+    width: 100%;
+    height: 39px;
+    border: 1px solid #17A100;
+    border-radius: 4px;
+    background: #17A100;
+    color: #F6F6F6;
+    box-shadow: 0 2px 2px rgb(33, 107, 20);
+}
+.content form button:active{
+    box-shadow: none;
+}
+form input {
+    width: 100%;
+    height: 38px;
+    border: 1px solid #fdfdfd;
+    border-radius: 4px;
+    margin-bottom: 27px;
+    color: black;
+}
+.longBar {
+    height: 2px;
+    background: #B93434;
+}
+.userBox {
+    display: flex;
+}
+.imgBox {
+    width: 132px;
+    height: 132px;
+    border-radius: 100px;
+    margin-left: auto;
+    background: #FDFDFD;
+}
+.imgBox:hover{
+    cursor: pointer;
+}
+.imgBox img {
+    width: 80px;
+    margin-left: 20%;
+    margin-top: 20%;
+}
+.passwordBox input {
+    width: 178px;
+}
+
+.wrong {
+    border: 2px solid rgb(145, 15, 15);
+}
+.right{
+    border: 2px solid green;
+}
+
+#fildWrong{
+    height: 100px;
+    
+}
+
+#passwordWrong {
+    display: none;
+}
