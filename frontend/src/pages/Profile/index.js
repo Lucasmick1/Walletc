@@ -1,15 +1,14 @@
 import React, { useEffect, useState} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import api from '../../services/api';
-import {FiPlus, FiDollarSign, FiEdit2, FiTrash, FiCircle} from 'react-icons/fi';
+import {FiPlus, FiDollarSign, FiEdit2, FiTrash, FiCircle, FiPower} from 'react-icons/fi';
 
-import './styles.css';
+import './styles.css'; 
 
 
 
 export default function Profile(){
     const history = useHistory();
-    const nome = localStorage.getItem('nome');
     const user_id = localStorage.getItem('id');
     const user_name = localStorage.getItem('nome').split(' ');
 
@@ -40,9 +39,9 @@ export default function Profile(){
             console.log(erro);
         }
 
-        if(toggleSitn == "red"){
+        if(toggleSitn === "red"){
             toggleSitn = "green";
-        }else if(toggleSitn == "green"){
+        }else if(toggleSitn === "green"){
             toggleSitn = "red";
         }
 
@@ -121,6 +120,17 @@ export default function Profile(){
     async function handleEdit(id){
         console.log(id)
     }
+    async function handleLogout(e){
+        e.preventDefault();
+
+        localStorage.removeItem('id');
+        localStorage.removeItem('nome');
+        setTimeout(()=>{
+            history.push('/');
+        },400)
+        
+
+    }
 
     useEffect(()=>{
         api.get('users/contas',{
@@ -164,17 +174,18 @@ export default function Profile(){
     
     return (
         
+
         <div>
-            {
-               
-            }
+
             <div className="header">
                 <h1>WALLETC</h1>
                 <div>
                 <p>{`Olá, ${user_name[0]}`}</p>
                 <FiDollarSign size={18} color="#17A100"/>
                 <p>{salario - valorTotal}</p>
+                <button onClick={handleLogout}><FiPower size={18}/></button>
                 </div>
+                
                 
             </div>
             <div className="longBar"></div>
