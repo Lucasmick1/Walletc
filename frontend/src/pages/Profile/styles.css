@@ -1,8 +1,58 @@
-.header div {
+.headerProfile{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
+    background: #323232;
+    color: #fdfdfd;
+    height: 56px;
+}
+.headerProfile div {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 
 }
+
+.headerProfile div p:nth-child(1){
+    margin-right: 20px;
+}
+.headerProfile div p:nth-child(3){
+    margin-left: 5px;
+}
+.headerProfile div svg:nth-child(4){
+    margin-right: 20px;
+}
+
+.detalhesCarteira {
+    background: #FFFFFF;
+    width: 150px;
+    height: 0px;
+    
+    display:block;
+    visibility: hidden;
+    margin: 5px 0 0 0;
+    position: absolute;
+    left: 70%;
+
+    border-radius: 8px;
+    transition:  .5s;
+
+}
+.detalhesCarteira::after{
+    border: 10px solid transparent;
+    border-bottom-color: #ffffff;
+    content: "";
+    left: 85px;
+    top:-19px;
+    position: absolute;
+}
+.detalhesCarteiraActive {
+    display: block;
+    transition: .5s;
+    visibility: visible;
+    height: 150px;
+}
+
 section {
     display: flex;
     justify-content: center;

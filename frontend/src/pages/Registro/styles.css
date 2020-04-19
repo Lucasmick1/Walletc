@@ -2,16 +2,17 @@
 .container {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-top: 5%;
+    justify-content: space-evenly;
+    margin:5% 0 0 10%;
 
 }
 .container img {
     width: 300px;
-    margin-left: 10%;
+    margin-left: 2%;
 }
-.content {
-    width: 30%;
+.container .content {
+    width: 70%;
+    background: none;
     
 }
 

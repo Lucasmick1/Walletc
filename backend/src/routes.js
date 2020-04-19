@@ -5,6 +5,9 @@ const ContasController = require('./controllers/ContasController');
 const ProfileController = require('./controllers/ProfileController');
 const SessionController = require('./controllers/SessionController');
 const SituationController = require('./controllers/SituationController');
+const SalarioController = require('./controllers/SalarioController');
+const CarteiraController = require('./controllers/CarteiraController');
+const CarteiraBdController = require('./controllers/CarteiraBdController');
 
 
 
@@ -45,10 +48,20 @@ routes.get('/contas/situation/:id',SituationController.index);
 routes.put('/contas/situation/:id',SituationController.update);
 
 // get salario
-routes.get('/users/salario', UsuarioController.indexSalario);
+routes.get('/users/salario', SalarioController.indexSalario);
 
+routes.put('/users/salario', SalarioController.updateSalario);
+
+routes.get('/users/carteira', CarteiraController.indexCarteira);
+
+routes.put('/users/carteira', CarteiraController.updateCarteira);
+
+routes.put('/users/carteiraBd/adiciona', CarteiraBdController.adicionaFundosCarteiraBd);
+//routes.put('/users/carteiraBd', CarteiraBdController.updateCarteiraBd);
+
+routes.get('/users/carteiraBd', CarteiraBdController.indexCarteiraBd);
 //update the salario mes
-routes.put('/users/salario/update', UsuarioController.updateSalario)
+
 
 
 

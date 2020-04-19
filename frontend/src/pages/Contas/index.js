@@ -12,7 +12,7 @@ export default function AdicionaContas(){
     const user_id = localStorage.getItem('id');
     const user_name = localStorage.getItem('nome').split(' ');
 
-    const [salario, setSalario] = useState('');
+    const [carteira, setCarteira] = useState('');
 
     const [nome, setNome] = useState('');
     const [valor, setValor] = useState('');
@@ -21,14 +21,14 @@ export default function AdicionaContas(){
     const situacao = 'red';
 
     useEffect(()=>{
-            api.get('users/salario',{
-                headers:{
-                    authorization : user_id
-                }
-            }).then(response => {
-                setSalario(response.data.salario);
-                
-            })
+        api.get('users/carteira',{
+            headers:{
+                authorization : user_id
+            }
+        }).then(response => {
+            setCarteira(response.data);
+            
+        });
 
             
     }, [user_id]);
@@ -68,7 +68,7 @@ export default function AdicionaContas(){
                 <div>
                 <p>{`Olá, ${user_name[0]}`}</p>
                 <FiDollarSign size={18} color="#17A100"/>
-                <p>{salario}</p>
+                <p>{carteira}</p>
                 </div>
             </div>
 
@@ -96,6 +96,8 @@ export default function AdicionaContas(){
                                  required
                                  value={valor}
                                  onChange={e => setValor(e.target.value)}
+                                 min="1"
+                                 step="0.010"
                                  />
                                  
                             </div>        

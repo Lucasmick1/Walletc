@@ -25,7 +25,9 @@ export default function Register(){
             nome:nome,
             email:email,
             senha:password,
-            salario:salario
+            salario:salario,
+            carteira: salario,
+            carteiraBd: salario
         }
         
         if(password === confPassword){
