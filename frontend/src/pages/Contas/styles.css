@@ -1,16 +1,16 @@
-.header {
+.headerContas {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     background: #323232;
     color: #fdfdfd;
     height: 56px;
 }
-.header div {
+.headerContas div {
     display: flex;
     justify-content: space-around;
 }
-.header div p {
+.headerContas div p {
     margin-right: 10px;
 }
 

@@ -36,17 +36,17 @@ module.exports = {
 
         const antigoSalario = await connection('usuarios').where('id', user_id).select('salario').first();
 
-        const antigaCarteira = await connection('usuarios').where('id', user_id).select('carteira').first();
+        const antigaCarteiraBd = await connection('usuarios').where('id', user_id).select('carteiraBd').first();
 
         await connection('usuarios').where('id', user_id).select('salario').update({
             salario :novoSalario
         });
         
-        const novaCarteira = (novoSalario - antigoSalario.salario) + antigaCarteira.carteira;
+        const novaCarteiraBd = (novoSalario - antigoSalario.salario) + antigaCarteiraBd.carteiraBd;
         
         
-        await connection('usuarios').where('id', user_id).select('carteira').update({
-            carteira:novaCarteira
+        await connection('usuarios').where('id', user_id).select('carteiraBd').update({
+            carteiraBd:novaCarteiraBd
         })
         
         

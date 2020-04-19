@@ -19,6 +19,34 @@ module.exports = {
         return response.json(carteiraBd);
     },
 
+    async updateCarteiraBd(request, response){
+        const user_id = request.headers.authorization;
+        const {update} = request.body;
+
+        const usuarioNoBanco = await connection('usuarios').where('id', user_id).select().first();
+
+        if(usuarioNoBanco.id !== user_id){
+            return response.status(405).json({Error:"Tarefa não autorizada!"});
+        };
+
+        const antigaCarteiraBd = await connection('usuarios').where('id', user_id).select('carteiraBd').first();
+        const antigaCarteira = await connection('usuarios').where('id', user_id).select('carteira').first();
+
+        const diferenca = antigaCarteiraBd.carteiraBd - antigaCarteira.carteira;
+
+        const novaCarteiraBd = update + diferenca;
+
+        await connection('usuarios').where('id', user_id).select('carteiraBd').update({
+            carteiraBd: novaCarteiraBd
+        });
+
+        const {carteiraBd} = await connection('usuarios').where('id', user_id).select('carteiraBd').first();
+
+        return response.json(carteiraBd);
+
+        
+    },
+
     async adicionaFundosCarteiraBd(request, response){
 
         const {fundosCarteiraBd} = request.body;

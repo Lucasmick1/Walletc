@@ -1,7 +1,15 @@
 import React, { useEffect, useState} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import api from '../../services/api';
-import {FiPlus, FiDollarSign, FiEdit2, FiTrash, FiCircle, FiPower, FiClipboard} from 'react-icons/fi';
+import {FiFilePlus, 
+        FiDollarSign, 
+        FiEdit2, 
+        FiTrash,
+        FiCircle,
+        FiPower, 
+        FiClipboard, 
+        FiSettings,
+        FiInbox} from 'react-icons/fi';
 
 import './styles.css'; 
 
@@ -22,12 +30,36 @@ export default function Profile(){
 
     const [valorTotalContas, setValorTotalContas] = useState('');
 
-    let toggle = true;
+    let toggleActnSettings = true;
     
-    let toggleSitn = ''; 
-   
-    async function toggleSituation(conta_id){
+    
+    function toggleSettings(e){
+        e.preventDefault();
+
+        const settings = document.querySelector('.settings');
+        
+        if(toggleActnSettings){
+            setTimeout(()=>{
+            
+                settings.classList.add('settingsActive')
+            },6)
+
+            toggleActnSettings = false;
+        }else{
+            setTimeout(()=>{
+                settings.classList.remove('settingsActive')
+            },6)
+
+            toggleActnSettings = true;
+        }
+
+    } 
+    async function toggleSituation(conta_id, e){
         const conta = conta_id;
+
+        let toggleActnSituation = ''; 
+
+        const botaoSituation = e.target;
         
         try{
            const response = await api.get(`contas/situation/${conta}`,{
@@ -37,74 +69,62 @@ export default function Profile(){
             });
 
 
-            toggleSitn = response.data;
+            toggleActnSituation = response.data;
             
         }catch(erro){
             console.log(erro);
         }
 
-        if(toggleSitn === "red"){
-            toggleSitn = "green";
-        }else if(toggleSitn === "green"){
-            toggleSitn = "red";
+        if(toggleActnSituation === "red"){
+            toggleActnSituation = "green";
+        }else if(toggleActnSituation === "green"){
+            toggleActnSituation = "red";
         }
 
-        
-        const dados = {
-            situacao : toggleSitn
-        }
-
+   
         try{
-            api.put(`contas/situation/${conta}`, dados,{
+            api.put(`contas/situation/${conta}`,{
+
+                situacao : toggleActnSituation
+                
+                },{
                 headers: {
                     authorization : user_id
                 }
             })
             
-            
-           
-
         }catch(erro){
             console.log(erro)
         }
-        
 
-        
+        botaoSituation.style.color = '';
+        botaoSituation.style.color = toggleActnSituation;
+          
     }
 
-     function toggleColor(e){
-
-        
-            e.style.color = '';
-            e.style.color = toggleSitn;
-       
-       
-        
-    }
 
     function toggleHeader(e){
-
+  
         if(e.target.classList.value === "cabecalho"){
-            const id = e.target.getAttribute('id');
 
-            
+            let toggleActnHeader = e.target.getAttribute('data-toggleHeader');
+            const id = e.target.getAttribute('id');
 
             let conteudo = document.querySelector(`#C${id}`);
     
-            if(toggle){
+            if(toggleActnHeader === "true"){
                 conteudo.classList.add('contentActive');
-                toggle = false;
-            }else {
+                e.target.setAttribute('data-toggleHeader', "false")
+            
+            }else if(toggleActnHeader === 'false'){
                 conteudo.classList.remove('contentActive');
-                toggle = true;
+                e.target.setAttribute('data-toggleHeader', "true")
             }
             
         }
-        
            
-        
-        
     }
+
     async function handleDeleteConta(id){
         try{
 
@@ -124,6 +144,7 @@ export default function Profile(){
     async function handleEdit(id){
         console.log(id)
     }
+
     async function handleLogout(e){
         e.preventDefault();
 
@@ -181,6 +202,7 @@ export default function Profile(){
     }, [user_id]);
 
     useEffect(()=>{
+
         let array = []
         let valor = contas.map(contas => array.push(contas.valor))
         let total = array.reduce((total, numero)=>{ return total + numero},0);
@@ -223,7 +245,7 @@ export default function Profile(){
             console.log(erro)
         }*/
 
-        try{
+       /* try{
             api.put('users/carteiraBd/adiciona',{fundosCarteiraBd:100},{
                 headers:{
                     authorization: user_id
@@ -234,27 +256,22 @@ export default function Profile(){
 
         }catch(erro){
 
+        }*/
+
+        try{
+            api.put('users/carteiraBd',{update:1200},{
+                headers:{
+                    authorization:user_id
+                }
+            }).then(response=>{
+                setCarteiraBd(response.data)
+            })
+        }catch(erro){
+
         }
     }
     
-    function handleShowDetalhesConta(){
-        const detalhes = document.querySelector('.detalhesCarteira');
-        
-
-        setTimeout(()=>{
-            
-            detalhes.classList.add('detalhesCarteiraActive')
-        },6)
-        
-    }
-
-    function handleHideDetalhesConta(){
-        const detalhes = document.querySelector('.detalhesCarteira');
-
-        setTimeout(()=>{
-            detalhes.classList.remove('detalhesCarteiraActive')
-        },6)
-    }
+   
     return (
         
 
@@ -262,35 +279,48 @@ export default function Profile(){
 
             <div className="headerProfile">
                 <h1 onClick={teste}>WALLETC</h1>
-                <div onMouseOver={handleShowDetalhesConta} onMouseOut={handleHideDetalhesConta}>
-                <p>{`Olá, ${user_name[0]}`}</p>
-                <p>Saldo atual:</p>
-                <FiClipboard size={18} color="#94490b" style={{transform:"rotate(-90deg)"}}/>
-                <p>{carteira }</p>
-                <FiDollarSign size={18} color="#17A100"/>
-                <button onClick={handleLogout}><FiPower size={18}/></button>
+
+                <Link to="contas/add" className="btnAdd">
+                    <FiFilePlus size={25} color="#F0F0F0"/>
+                </Link>
+                <div>
+                    <p>{`Olá, ${user_name[0]}`}</p>
+
+                    <p>Carteira:</p>
+
+                    <FiDollarSign size={18} color="#17A100"/>
+                    
+                    <p>{carteira}</p>
+
+                    
+                    
+
+                    <button onClick={toggleSettings}><FiSettings size={18} color="#F0F0F0"/></button>
+                
                 </div>
                 
                 
             </div>
             
             <div className="longBar"></div>
-            <div className="detalhesCarteira"
-                 onMouseOver={handleShowDetalhesConta}
-                 onMouseOut={handleHideDetalhesConta}
-            >
-                <p>{salario}</p>
+
+            <div className="settings">
+                <p>Seu salario:{salario}</p>
+                <p>Sua carteira:{carteira}<button><FiEdit2 size={18}/></button></p>
+                
+                <button onClick={handleLogout}><FiPower size={18}/></button>
             </div>
-            <Link to="contas/add" >
-                <FiPlus size={25}/>
-            </Link>
+
+            
+            
             <section>
+            
                 <ul>
                     {
                         contas.map(contas=>{
                             
                             return <li key={contas.id}>
-                                <div className="cabecalho" id={contas.id} onClick={(e)=>toggleHeader(e)}>
+                                <div className="cabecalho" data-toggleHeader="true" id={contas.id} onClick={(e)=>toggleHeader(e)}>
                                     <div className="contaInf">
                                         <p>{contas.nome}</p>
                                         <FiDollarSign size={18} color="#17A100"/>
@@ -304,16 +334,9 @@ export default function Profile(){
                                             <FiTrash size={18} color="#F0F0F0"/>
                                         </button>
                                         <button onClick={async(e)=>{
-                                            
-                                            const obj = e.target
-                                            
-                                            
-                                            await toggleSituation(contas.id);
-                                            
-                                            toggleColor(obj)
-                                            
-                                            
-                                            
+                                    
+                                            await toggleSituation(contas.id, e);
+                                  
                                         }}
                                         id="situation" className="situation">
                                             <FiCircle size={18} style={{transition:'0.5s'}}color={`${contas.situacao}`} />

@@ -63,7 +63,7 @@ export default function AdicionaContas(){
     return (
         <div>
 
-             <div className="header">
+             <div className="headerContas">
                 <h1>WALLETC</h1>
                 <div>
                 <p>{`Olá, ${user_name[0]}`}</p>
