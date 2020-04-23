@@ -5,13 +5,13 @@ import {FiFilePlus,
         FiDollarSign, 
         FiEdit2, 
         FiTrash,
-        FiCircle,
-        FiPower, 
-        FiClipboard, 
+        FiCircle, 
         FiSettings,
-        FiInbox} from 'react-icons/fi';
+        } from 'react-icons/fi';
 
 import './styles.css'; 
+
+import SettingsMenu from '../Settings';
 
 
 
@@ -30,6 +30,14 @@ export default function Profile(){
 
     const [valorTotalContas, setValorTotalContas] = useState('');
 
+    const [alterarSalario, setAlterarSalario] = useState('');
+
+    const [alterarCarteira, setAlterarCarteira] = useState('');
+
+    const [adicionarFundos, setAdicionarFundos] = useState('');
+    
+    const [testa, setTesta] = useState('');
+
     let toggleActnSettings = true;
     
     
@@ -37,6 +45,7 @@ export default function Profile(){
         e.preventDefault();
 
         const settings = document.querySelector('.settings');
+        
         
         if(toggleActnSettings){
             setTimeout(()=>{
@@ -199,7 +208,7 @@ export default function Profile(){
 
         
         
-    }, [user_id]);
+    }, [user_id, salario]);
 
     useEffect(()=>{
 
@@ -230,55 +239,14 @@ export default function Profile(){
    
    }, [valorTotalContas, carteiraBd])
     
-    async function teste(e){
-        e.preventDefault();
-       /* const dados ={
-            fundosCarteiraBd: -300
-        }
-        try{
-            api.put('users/carteiraBd',dados, {
-                headers : {
-                    authorization: user_id
-                }
-            })
-        }catch(erro){
-            console.log(erro)
-        }*/
 
-       /* try{
-            api.put('users/carteiraBd/adiciona',{fundosCarteiraBd:100},{
-                headers:{
-                    authorization: user_id
-                }
-            }).then(response =>{
-                setCarteiraBd(response.data)
-            })
-
-        }catch(erro){
-
-        }*/
-
-        try{
-            api.put('users/carteiraBd',{update:1200},{
-                headers:{
-                    authorization:user_id
-                }
-            }).then(response=>{
-                setCarteiraBd(response.data)
-            })
-        }catch(erro){
-
-        }
-    }
-    
-   
     return (
         
 
         <div>
 
             <div className="headerProfile">
-                <h1 onClick={teste}>WALLETC</h1>
+                <h1>WALLETC</h1>
 
                 <Link to="contas/add" className="btnAdd">
                     <FiFilePlus size={25} color="#F0F0F0"/>
@@ -286,7 +254,6 @@ export default function Profile(){
                 <div>
                     <p>{`Olá, ${user_name[0]}`}</p>
 
-                    <p>Carteira:</p>
 
                     <FiDollarSign size={18} color="#17A100"/>
                     
@@ -304,13 +271,15 @@ export default function Profile(){
             
             <div className="longBar"></div>
 
-            <div className="settings">
-                <p>Seu salario:{salario}</p>
-                <p>Sua carteira:{carteira}<button><FiEdit2 size={18}/></button></p>
-                
-                <button onClick={handleLogout}><FiPower size={18}/></button>
-            </div>
-
+            
+            <SettingsMenu user_id={user_id}
+                              carteira={carteira} setCarteira={setCarteira}
+                              carteiraBd={carteiraBd} setCarteiraBd={setCarteiraBd}
+                              salario={salario} setSalario={setSalario}
+                              alterarSalario={alterarSalario} setAlterarSalario={setAlterarSalario}
+                              alterarCarteira={alterarCarteira} setAlterarCarteira={setAlterarCarteira}
+                              adicionarFundos={adicionarFundos} setAdicionarFundos={setAdicionarFundos}
+                              />
             
             
             <section>
@@ -368,7 +337,8 @@ export default function Profile(){
                     }
                 </ul>
             </section>
-            
+                
+               
         </div>
     )
     

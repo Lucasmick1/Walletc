@@ -36,10 +36,7 @@ form input {
     margin-bottom: 27px;
     color: black;
 }
-.longBar {
-    height: 2px;
-    background: #B93434;
-}
+
 .userBox {
     display: flex;
 }

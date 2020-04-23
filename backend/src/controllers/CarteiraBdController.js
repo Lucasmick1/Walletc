@@ -22,7 +22,8 @@ module.exports = {
     async updateCarteiraBd(request, response){
         const user_id = request.headers.authorization;
         const {update} = request.body;
-
+        
+        
         const usuarioNoBanco = await connection('usuarios').where('id', user_id).select().first();
 
         if(usuarioNoBanco.id !== user_id){

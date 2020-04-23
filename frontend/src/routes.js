@@ -5,8 +5,8 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Register from './pages/Registro';
 import Logon from './pages/Logon';
 import Profile from './pages/Profile';
-import addContas from './pages/Contas';
-
+import AddContas from './pages/Contas';
+import Settings from './pages/Settings';
 
 
 
@@ -18,7 +18,9 @@ export default function Routes(){
         <Route path="/" exact component={Logon}/>
         <Route path="/register" component={Register}/>
         <Route path="/users/contas" exact component={Profile}/>
-        <Route path="/users/contas/add" component={addContas}/>
+        <Route path="/users/contas/add" component={AddContas}/>
+        <Route path="/teste" exact component={Settings}/>
+
         </Switch>
         </BrowserRouter>
     )

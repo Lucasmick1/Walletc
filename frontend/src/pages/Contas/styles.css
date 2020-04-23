@@ -1,6 +1,6 @@
 .headerContas {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
     background: #323232;
     color: #fdfdfd;

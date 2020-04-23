@@ -42,15 +42,25 @@ module.exports = {
             salario :novoSalario
         });
         
+        if((novoSalario - antigoSalario.salario) < 0){
+
+            return response.json(novoSalario);
+        }else {
+
         const novaCarteiraBd = (novoSalario - antigoSalario.salario) + antigaCarteiraBd.carteiraBd;
-        
-        
+
         await connection('usuarios').where('id', user_id).select('carteiraBd').update({
             carteiraBd:novaCarteiraBd
         })
         
         
-        return response.status(200).json({Successful: "Atualização feita com sucesso!"});
+        return response.json(novoSalario);
+
+        }
+        
+        
+        
+        
     
 }
 }

@@ -1,11 +1,14 @@
 import React, { useEffect, useState} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import api from '../../services/api';
-import {FiDollarSign} from 'react-icons/fi'
+import {FiDollarSign,FiSettings} from 'react-icons/fi';
+
 
 import logo from '../../assets/logo.svg';
 
 import './styles.css';
+
+import SettingsMenu from '../Settings';
 
 export default function AdicionaContas(){
 
@@ -13,6 +16,18 @@ export default function AdicionaContas(){
     const user_name = localStorage.getItem('nome').split(' ');
 
     const [carteira, setCarteira] = useState('');
+    
+    const [carteiraBd, setCarteiraBd] = useState('');
+
+    const [salario, setSalario] = useState('');
+
+    const [alterarSalario, setAlterarSalario] = useState('');
+
+    const [alterarCarteira, setAlterarCarteira] = useState('');
+
+    const [adicionarFundos, setAdicionarFundos] = useState('');
+
+    const diferenca = carteiraBd - carteira;
 
     const [nome, setNome] = useState('');
     const [valor, setValor] = useState('');
@@ -20,7 +35,19 @@ export default function AdicionaContas(){
     const [vencimento, setVencimento] = useState('');
     const situacao = 'red';
 
+    let toggleActnSettings = true;
+
     useEffect(()=>{
+        api.get('users/salario',{
+            headers:{
+                authorization : user_id
+            }
+        }).then(response => {
+            setSalario(response.data);
+            
+            
+        });
+
         api.get('users/carteira',{
             headers:{
                 authorization : user_id
@@ -30,9 +57,17 @@ export default function AdicionaContas(){
             
         });
 
+        api.get('users/carteiraBd',{
+            headers: {
+                authorization: user_id
+            }
+        }).then(response => {
+            setCarteiraBd(response.data)
+        })
             
-    }, [user_id]);
+    }, [user_id, salario]);
 
+    
     async function handleAddConta(e){
         e.preventDefault();
         const dados = {
@@ -60,19 +95,55 @@ export default function AdicionaContas(){
         setVencimento('');
     }
 
+    function toggleSettings(e){
+        e.preventDefault();
+
+        const settings = document.querySelector('.settings');
+        
+        
+        if(toggleActnSettings){
+            setTimeout(()=>{
+            
+                settings.classList.add('settingsActive')
+            },6)
+
+            toggleActnSettings = false;
+        }else{
+            setTimeout(()=>{
+                settings.classList.remove('settingsActive')
+            },6)
+
+            toggleActnSettings = true;
+        }
+
+    }
+
     return (
         <div>
 
              <div className="headerContas">
-                <h1>WALLETC</h1>
-                <div>
-                <p>{`Olá, ${user_name[0]}`}</p>
-                <FiDollarSign size={18} color="#17A100"/>
-                <p>{carteira}</p>
-                </div>
+
+                    <h1>WALLETC</h1>
+                    <div>
+                        <p>{`Olá, ${user_name[0]}`}</p>
+
+                        <FiDollarSign size={18} color="#17A100"/>
+
+                        <p>{carteira}</p>
+
+                        <button onClick={toggleSettings}><FiSettings size={18} color="#F0F0F0"/></button>
+                    </div>
             </div>
 
             <div className="longBar"></div>
+            <SettingsMenu user_id={user_id}
+                              carteira={carteira} setCarteira={setCarteira}
+                              carteiraBd={carteiraBd} setCarteiraBd={setCarteiraBd}
+                              salario={salario} setSalario={setSalario}
+                              alterarSalario={alterarSalario} setAlterarSalario={setAlterarSalario}
+                              alterarCarteira={alterarCarteira} setAlterarCarteira={setAlterarCarteira}
+                              adicionarFundos={adicionarFundos} setAdicionarFundos={setAdicionarFundos}
+                              />
 
             <div className="conteudo">
                 <section className="logoWalletc">
@@ -141,9 +212,9 @@ export default function AdicionaContas(){
                        
                         
                     </form>
-
+    
                 </section>
-
+    
             </div>
             
         </div>
