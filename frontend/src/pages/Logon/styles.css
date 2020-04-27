@@ -1,11 +1,11 @@
-.conteudoLogon {
+.logonContent {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 5%;
 }
 
-.conteudoLogon section {
+.logonContent section {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -15,32 +15,32 @@
     background: #d4cbcb;
     
 }
-.conteudoLogon section form {
+.logonContent section form {
     margin: 5% 0 5% 0;
     width: 90%;
     transition: .5s;
     
 }
-.conteudoLogon section form input {
+.logonContent section form input {
     width: 100%;
     margin-top: 5%;
     transition: .5s;
 }
-.conteudoLogon section form input:nth-child(2){
+.logonContent section form input:nth-child(2){
     width: 100%;
 }
 
-.campoErro{
+.errorSpace{
     height: 60px;
     margin-bottom: 25px;
     background: lightgreen;
 }
-.menssagemErro{
+.errorMessage{
     font-size: 25px;
     color: lightcoral;
     transition: .5s;
 }
-.continuar{
+.continue,.login{
     width: 100%;
     background: #17A100;
     height: 39px;
@@ -51,28 +51,17 @@
     margin-bottom: 5%;
 }
 
-.continuar:active{
-    box-shadow: none;
-}
-.entrar{
-    width: 100%;
-    background: #17A100;
-    height: 39px;
-    border: 1px solid #17A100;
-    border-radius: 4px;
-    color: #F6F6F6;
-    box-shadow: 0 2px 2px rgb(33, 107, 20);
-    margin-bottom: 5%;
-}
-.entrar:active{
+.continue:active, .login:active{
     box-shadow: none;
 }
 
-.campoEmailActive {
+
+.logonContainerActive {
     transition: .5s;
 }
-.campoEmailActive .conteudoLogon section form input{
-   width: 0.1px;
+
+
+.newGroup p a {
+    text-decoration: none;
+    color: black;
 }
-
-

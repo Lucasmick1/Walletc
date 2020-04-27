@@ -2,6 +2,7 @@ import React , {useState} from 'react';
 import api from '../../services/api';
 import './styles.css';
 import {Link, useHistory} from 'react-router-dom';
+import {FiEdit, FiLogIn} from 'react-icons/fi'
 
 export default function Logon(){
 
@@ -9,7 +10,7 @@ export default function Logon(){
     const [password, setPassword] = useState('');
     const history = useHistory();
 
-    const [menssagemErro, setMenssagemErro] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
 async function handleEmailLogin(e){
     e.preventDefault();
@@ -18,71 +19,78 @@ async function handleEmailLogin(e){
         email
     }
 
-    const campoEmail = document.querySelector('.campoEmail');
-    const inputSenha = document.querySelector('.inputSenha');
+    const logonContainer = document.querySelector('.logonContainer');
+    const inputPassword = document.querySelector('.inputPassword');
 
     
 
     try{
-        const resposta = await api.post('users/profile/email', data);
+        const response = await api.post('users/profile/email', data);
         
-        localStorage.setItem('id', resposta.data.id);
+        localStorage.setItem('id', response.data.id);
 
-        campoEmail.classList.add('campoEmailActive');
+        logonContainer.classList.add('logonContainerActive');
 
+        logonContainer.children[0].children[1].children[0].children[2].style.width = '1px';
+        
         setTimeout(()=>{
-            campoEmail.children[0].children[1].children[0].children[2].style.display = 'none';
+            
+            logonContainer.children[0].children[1].children[0].children[2].style.display = 'none';
 
-             inputSenha.style.display = 'block';
+             inputPassword.style.display = 'block';
              
-            campoEmail.classList.remove('campoEmailActive');
+            logonContainer.classList.remove('logonContainerActive');
 
             setTimeout(()=>{
-                campoEmail.children[0].children[1].children[0].children[1].style.display = 'block';
-                inputSenha.style.width = '100%';
+                logonContainer.children[0].children[1].children[0].children[1].style.display = 'block';
+                inputPassword.style.width = '100%';
                 
-                campoEmail.children[0].children[1].children[0].children[4].style.display = 'none';
-                campoEmail.children[0].children[1].children[0].children[5].style.display = 'block';
-                campoEmail.children[0].children[1].children[0].children[6].style.display = 'none';
+                logonContainer.children[0].children[1].children[0].children[4].style.display = 'none';
+                logonContainer.children[0].children[1].children[0].children[5].style.display = 'block';
+                logonContainer.children[0].children[1].children[0].children[6].style.display = 'none';
             },100)
             
         },900)
 
     }catch(erro){
-        setMenssagemErro('Email não encontrado ou incorreto!')
+        setErrorMessage('Email não encontrado ou incorreto!')
             setEmail('');
 
             setTimeout(()=>{
-                setMenssagemErro('');
+                setErrorMessage('');
             },5500)
     }
 }
 function handleChangeEmail(e){
     e.preventDefault();
     
-    const campoEmail = document.querySelector('.campoEmail');
-    const inputSenha = document.querySelector('.inputSenha');
+    const logonContainer = document.querySelector('.logonContainer');
+    const inputPassword = document.querySelector('.inputPassword');
 
-    campoEmail.classList.add('campoEmailActive');
-    inputSenha.style.width = '1px'
-    campoEmail.children[0].children[1].children[0].children[1].style.display = 'none';
+    logonContainer.classList.add('logonContainerActive');
+    inputPassword.style.width = '1px'
+    logonContainer.children[0].children[1].children[0].children[1].style.display = 'none';
        setTimeout(()=>{
         
-             inputSenha.style.display = 'none';
-            campoEmail.children[0].children[1].children[0].children[2].style.display = 'block';
+             inputPassword.style.display = 'none';
+             
+            logonContainer.children[0].children[1].children[0].children[2].style.display = 'block';
+            logonContainer.children[0].children[1].children[0].children[2].style.width = '1px';
+            
 
              
              
-            campoEmail.classList.remove('campoEmailActive');
+            logonContainer.classList.remove('logonContainerActive');
 
             setTimeout(()=>{
+                logonContainer.children[0].children[1].children[0].children[2].style.width = '100%'; 
                 
                 
-                
-                campoEmail.children[0].children[1].children[0].children[5].style.display = 'none';
-                campoEmail.children[0].children[1].children[0].children[4].style.display = 'block';
-                campoEmail.children[0].children[1].children[0].children[6].style.display = 'block';
+                logonContainer.children[0].children[1].children[0].children[5].style.display = 'none';
+                logonContainer.children[0].children[1].children[0].children[4].style.display = 'block';
+                logonContainer.children[0].children[1].children[0].children[6].style.display = 'block';
             },100)
+            
             
         },900)
 
@@ -103,11 +111,11 @@ async function handleLogon(e){
 
             history.push('/users/contas');
         }catch(erro){
-            setMenssagemErro('Erro Senha incorreta!')
+            setErrorMessage('Erro Senha incorreta!')
             setPassword('');
 
             setTimeout(()=>{
-                setMenssagemErro('');
+                setErrorMessage('');
             },5500)
             
         }
@@ -125,37 +133,59 @@ async function handleLogon(e){
 
     return (
         <div>
-            <div className="campoEmail">
+            <div className="logonContainer">
 
-                <div className="conteudoLogon">
-                    <div className="campoErro">
-                        <p className="menssagemErro" >{menssagemErro}</p>
+                <div className="logonContent">
+                    <div className="errorSpace">
+                        <p className="errorMessage" >{errorMessage}</p>
                     </div>
 
                     <section>
 
                         <form style={{transition:'.5s'}}>
+
                             <h1>Fazer login</h1>
-                            <p style={{display:'none'}}>{email}<button onClick={handleChangeEmail}style={{marginLeft:'10px'}}>Alterar</button></p>
+
+                            <p style={{display:'none', fontSize:'16px', marginTop:'10px'}}>
+
+                                {email}
+
+                                <button onClick={handleChangeEmail}style={{marginLeft:'10px', color:'#17A100'}}>
+                                    Alterar
+                                   
+                                </button>
+                            </p>
+                           
                             <input type="text"
                                 placeholder="E-mail"
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
-                                id="teste"
+                                className="inputEmail"
                             />
                             <input type="password"
                                 placeholder="Senha"
                                 value={password}
                                 onChange={e=> setPassword(e.target.value)}
-                                className="inputSenha"
-                                style={{display: 'none',transition: '.5s'}}
+                                className="inputPassword"
+                                style={{display: 'none',transition: '.5s', width:"1px"}}
                                 />
 
-                            <button type="submit" onClick={handleEmailLogin} className="continuar" >Continuar</button>
+                            <button type="submit" onClick={handleEmailLogin} className="continue" >Continuar</button>
 
-                            <button type="submit" onClick={handleLogon}className="entrar" style={{display:'none'}}>Entrar</button>
+                            <button type="submit" onClick={handleLogon} className="login" style={{display:'none'}}>Entrar</button>
 
-                            <p style={{transition:'.5s'}}>É novo por aqui?<Link to="/register" style={{marginLeft:'10px'}}>Cadastre-se</Link></p>
+                            <div className="newGroup">
+                                <p>É novo por aqui?
+                                    <Link to="/register" style={{marginLeft:'10px'}}>
+                                        Cadastre-se
+                                        <FiLogIn style={{verticalAlign:"text-bottom",
+                                                         marginLeft:"5px",
+                                                         }} size={18} color="#17A100"/>
+                                    </Link>
+                                </p>
+
+                            </div>
+                           
                         </form> 
 
                     </section>

@@ -1,22 +1,42 @@
 
-.container {
+.registerContainer {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    margin:5% 0 0 10%;
+    justify-content: center;
+    margin:3% 0 2% 0;
+    width: 100%;
 
 }
-.container img {
+.registerContainer img {
     width: 300px;
     margin-left: 2%;
 }
-.container .content {
-    width: 70%;
-    background: none;
+ .registerContent {
+    width: 50%;
+    background: linear-gradient(90deg ,rgb(27,179,49), rgb(2,98,43));
+    border-radius: 20px  0 20px 0;
+    box-shadow: 0px 0px 10px -2px black;
     
 }
 
-.content form button {
+.formContainer{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 5%;
+    
+}
+.formContainer form input {
+    width: 100%;
+    height: 38px;
+
+    border-radius: 4px;
+    margin-bottom: 27px;
+    color: black;
+}
+
+.formContainer form button {
     width: 100%;
     height: 39px;
     border: 1px solid #17A100;
@@ -25,52 +45,90 @@
     color: #F6F6F6;
     box-shadow: 0 2px 2px rgb(33, 107, 20);
 }
-.content form button:active{
+
+.formContainer form button:active{
     box-shadow: none;
 }
-form input {
-    width: 100%;
-    height: 38px;
-    border: 1px solid #fdfdfd;
-    border-radius: 4px;
-    margin-bottom: 27px;
-    color: black;
-}
-
-.userBox {
+.passwordContainer {
     display: flex;
 }
-.imgBox {
-    width: 132px;
-    height: 132px;
-    border-radius: 100px;
-    margin-left: auto;
-    background: #FDFDFD;
+.infSpace{
+    
+    background: rgb(2,98,43);
+    height: 100px;
+    width: 200px;
+    margin: 0 0 0 7%;
+    border-radius: 0 8px 8px 45px;
+    text-align: left;
+    box-shadow: 0 0 5px -1px black;
+    visibility: hidden;
+    transition: .5s;
+    opacity: 0;
 }
-.imgBox:hover{
-    cursor: pointer;
+.infSpace ul{
+    width: 200px;
+    margin:3% 10%;
 }
-.imgBox img {
-    width: 80px;
-    margin-left: 20%;
-    margin-top: 20%;
+.infSpace ul li {
+    list-style: none;
+    color: #FFFFFF;
 }
-.passwordBox input {
+.infSpace ul li:nth-child(1) {
+    font-weight: bold;
+}
+
+.infPassword,
+.infConfPassword{
+    display: none;
+}
+
+
+.formContainer .passwordBox input {
     width: 178px;
 }
 
-.wrong {
-    border: 2px solid rgb(145, 15, 15);
+.userPictSpace {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 5% 0;
 }
-.right{
-    border: 2px solid green;
-}
-
-#fildWrong{
-    height: 100px;
+.userPict{
+    display: flex;
+    width: 120px;
+    height: 120px;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 60px;
+    background:#FFFFFF;
     
 }
-
-#passwordWrong {
-    display: none;
+.userPict:hover{
+    cursor: pointer;
+}
+.userPictInf {
+    width: 60%;
+    color: #FFFFFF;
+}
+.messageErrorSpace{
+    visibility: hidden;
+    width: 60%;
+    height: 0;
+    
+    margin-bottom: 5px;
+    background: rgb(156, 84, 96); 
+    border: 1px solid red; 
+    border-radius: 4px;
+    padding: 5px;
+    text-align: center;
+    transition: .6s ;
+    
+}
+.messageErrorSpaceActive{
+    visibility: visible;
+    height: 50px;
+}
+#messageError {
+    font-size: 2em;
+    color:#F0F0F0;
+    
 }
