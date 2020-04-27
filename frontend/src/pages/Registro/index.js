@@ -294,7 +294,7 @@ export default function Register(){
 
                    
 
-                    <p style={{margin:'2% 0 1% 23%'}}>
+                    <p style={{margin:'3% 0 1% 23%'}}>
                         <Link to="/" style={{textDecoration:"none", color:"#FFFFFF"}}>
                             <FiLogIn style={{transform:"rotate(180deg)",
                                             verticalAlign:"text-bottom",
