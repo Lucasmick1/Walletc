@@ -161,7 +161,7 @@
 }
 
 
-section {
+.containerProfile section {
     display: flex;
     justify-content: center;
     margin-top: 5%;
@@ -169,7 +169,7 @@ section {
 
 
 
-section ul li {
+.containerProfile section ul li {
     list-style: none;
 }
 .cabecalho, .contaInf, .contaActions {

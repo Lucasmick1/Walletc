@@ -243,7 +243,7 @@ export default function Profile(){
     return (
         
 
-        <div>
+        <div className="containerProfile">
 
             <div className="headerProfile">
                 <h1>WALLETC</h1>
@@ -279,7 +279,7 @@ export default function Profile(){
                               alterarSalario={alterarSalario} setAlterarSalario={setAlterarSalario}
                               alterarCarteira={alterarCarteira} setAlterarCarteira={setAlterarCarteira}
                               adicionarFundos={adicionarFundos} setAdicionarFundos={setAdicionarFundos}
-                              />
+            />
             
             
             <section>

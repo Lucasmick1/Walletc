@@ -294,11 +294,11 @@ export default function Register(){
 
                    
 
-                    <p style={{margin:'3% 0 1% 23%'}}>
+                    <p style={{margin:'2% 0 1% 23%'}}>
                         <Link to="/" style={{textDecoration:"none", color:"#FFFFFF"}}>
                             <FiLogIn style={{transform:"rotate(180deg)",
                                             verticalAlign:"text-bottom",
-                                            marginRight:"5px"}} size={18} color="#02622b"/>
+                                            marginRight:"5px"}} size={18} color="black"/>
                             Voltar à tela de logon 
                         </Link>
                         

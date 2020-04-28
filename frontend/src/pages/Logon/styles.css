@@ -1,46 +1,42 @@
-.logonContent {
+.contentLogon {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 5%;
 }
 
-.logonContent section {
+.formLogon {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     height: 350px;
     width: 35%;
-    background: #d4cbcb;
+    background: linear-gradient(90deg ,rgb(27,179,49), rgb(2,98,43));
+    border-radius: 20px  0 20px 0;
+    box-shadow: 0px 0px 10px -2px black;
     
 }
-.logonContent section form {
+.formLogon form {
     margin: 5% 0 5% 0;
     width: 90%;
     transition: .5s;
     
 }
-.logonContent section form input {
+.formLogon form input {
     width: 100%;
-    margin-top: 5%;
+    height: 38px;
+    color: black;
+    margin:5% 0 5% 0;
     transition: .5s;
+    border-radius: 4px;
 }
-.logonContent section form input:nth-child(2){
+.formLogon form input:nth-child(2){
     width: 100%;
 }
 
-.errorSpace{
-    height: 60px;
-    margin-bottom: 25px;
-    background: lightgreen;
-}
-.errorMessage{
-    font-size: 25px;
-    color: lightcoral;
-    transition: .5s;
-}
-.continue,.login{
+.btnContinue,
+.btnLogin{
     width: 100%;
     background: #17A100;
     height: 39px;
@@ -51,17 +47,29 @@
     margin-bottom: 5%;
 }
 
-.continue:active, .login:active{
+.btnContinue:active,
+.btnLogin:active{
     box-shadow: none;
 }
-
-
-.logonContainerActive {
-    transition: .5s;
-}
-
 
 .newGroup p a {
     text-decoration: none;
     color: black;
+}
+
+.messageDisplay {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: 0 0 0 51%;
+    color: #FFFFFF;
+    background: rgb(2,98,43);
+    height: 100px;
+    width: 230px;
+    visibility: hidden;
+    opacity: 0;
+    border-radius: 0 8px 8px 45px;
+    text-align: left;
+    box-shadow: 0 0 5px -1px black;
+    transition: .5s;
 }

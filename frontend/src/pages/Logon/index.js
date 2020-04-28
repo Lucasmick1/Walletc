@@ -1,7 +1,11 @@
 import React , {useState} from 'react';
+
 import api from '../../services/api';
+
 import './styles.css';
+
 import {Link, useHistory} from 'react-router-dom';
+
 import {FiEdit, FiLogIn} from 'react-icons/fi'
 
 export default function Logon(){
@@ -10,92 +14,91 @@ export default function Logon(){
     const [password, setPassword] = useState('');
     const history = useHistory();
 
-    const [errorMessage, setErrorMessage] = useState('');
+    const [message, setMessage] = useState('');
 
-async function handleEmailLogin(e){
-    e.preventDefault();
-
-    const data = {
-        email
-    }
-
-    const logonContainer = document.querySelector('.logonContainer');
+    const inputEmail = document.querySelector('.inputEmail');
     const inputPassword = document.querySelector('.inputPassword');
+    const changeEmail = document.querySelector('.changeEmail');
+    const btnContinue = document.querySelector('.btnContinue');
+    const btnLogin = document.querySelector('.btnLogin');
+    const newGroup = document.querySelector('.newGroup');
 
     
 
-    try{
-        const response = await api.post('users/profile/email', data);
-        
-        localStorage.setItem('id', response.data.id);
+    async function handleEmailLogin(e){
+        e.preventDefault();
 
-        logonContainer.classList.add('logonContainerActive');
+        const data = {
+            email
+        }
 
-        logonContainer.children[0].children[1].children[0].children[2].style.width = '1px';
-        
-        setTimeout(()=>{
+        try{
+            const response = await api.post('users/profile/email', data);
             
-            logonContainer.children[0].children[1].children[0].children[2].style.display = 'none';
+            localStorage.setItem('id', response.data.id);
 
-             inputPassword.style.display = 'block';
-             
-            logonContainer.classList.remove('logonContainerActive');
-
+            inputEmail.style.width = '1px'; 
+            
             setTimeout(()=>{
-                logonContainer.children[0].children[1].children[0].children[1].style.display = 'block';
-                inputPassword.style.width = '100%';
+                inputEmail.style.display = 'none';
+                inputPassword.style.display = 'block';
                 
-                logonContainer.children[0].children[1].children[0].children[4].style.display = 'none';
-                logonContainer.children[0].children[1].children[0].children[5].style.display = 'block';
-                logonContainer.children[0].children[1].children[0].children[6].style.display = 'none';
-            },100)
+                setTimeout(()=>{
+                    changeEmail.style.display = 'block';
+                    inputPassword.style.width = '100%';
+                    
+                    btnContinue.style.display = 'none'; 
+                    btnLogin.style.display = 'block'; 
+                    newGroup.style.display = 'none'; 
+                },100);
+                
+            },900)
+
+        }catch(erro){
+            const messageDisplay = document.querySelector('.messageDisplay');
+            messageDisplay.style.visibility = "visible";
+            messageDisplay.style.opacity = "1";
             
-        },900)
-
-    }catch(erro){
-        setErrorMessage('Email não encontrado ou incorreto!')
-            setEmail('');
-
+            if(erro.message === 'Request failed with status code 405'){
+                setMessage('Email não encontrado ou incorreto!')
+            }else if(erro.message === 'Network Error'){
+                setMessage('Erro ao fazer login. Verifique sua conexão, ou contate nosso suporte!')
+            }
+            
             setTimeout(()=>{
-                setErrorMessage('');
+                messageDisplay.style.visibility = "hidden";
+                 messageDisplay.style.opacity = "0";
+                setMessage('');
             },5500)
+        }
     }
-}
-function handleChangeEmail(e){
-    e.preventDefault();
-    
-    const logonContainer = document.querySelector('.logonContainer');
-    const inputPassword = document.querySelector('.inputPassword');
 
-    logonContainer.classList.add('logonContainerActive');
-    inputPassword.style.width = '1px'
-    logonContainer.children[0].children[1].children[0].children[1].style.display = 'none';
-       setTimeout(()=>{
-        
-             inputPassword.style.display = 'none';
-             
-            logonContainer.children[0].children[1].children[0].children[2].style.display = 'block';
-            logonContainer.children[0].children[1].children[0].children[2].style.width = '1px';
-            
+    function handleChangeEmail(e){
 
-             
-             
-            logonContainer.classList.remove('logonContainerActive');
+        e.preventDefault();
+        inputPassword.style.width = '1px'
+        changeEmail.style.display = 'none';
+
+        setTimeout(()=>{
+
+            inputPassword.style.display = 'none';
+            inputEmail.style.display = 'block';
+            inputEmail.style.width = '1px';
 
             setTimeout(()=>{
-                logonContainer.children[0].children[1].children[0].children[2].style.width = '100%'; 
-                
-                
-                logonContainer.children[0].children[1].children[0].children[5].style.display = 'none';
-                logonContainer.children[0].children[1].children[0].children[4].style.display = 'block';
-                logonContainer.children[0].children[1].children[0].children[6].style.display = 'block';
-            },100)
-            
-            
-        },900)
 
-}
-async function handleLogon(e){
+                inputEmail.style.width = '100%'; 
+                btnLogin.style.display = 'none';
+                btnContinue.style.display = 'block'; 
+                newGroup.style.display = 'block'; 
+
+            },100);
+
+        },900);
+
+    }
+
+    async function handleLogon(e){
         e.preventDefault();
 
         const data = {
@@ -105,54 +108,53 @@ async function handleLogon(e){
 
         try{
             const response = await api.post('users/profile', data);
-            
+                
             localStorage.setItem('id',response.data.id);
             localStorage.setItem('nome', response.data.nome);
 
             history.push('/users/contas');
         }catch(erro){
-            setErrorMessage('Erro Senha incorreta!')
-            setPassword('');
 
-            setTimeout(()=>{
-                setErrorMessage('');
-            },5500)
+            const messageDisplay = document.querySelector('.messageDisplay');
+            messageDisplay.style.visibility = "visible";
+            messageDisplay.style.opacity = "1";
+
+            setMessage('Senha incorreta!')
             
+            setTimeout(()=>{
+                messageDisplay.style.visibility = "hidden";
+                messageDisplay.style.opacity = "0";
+                setMessage('');
+            },5500)
+                
         }
-    
-
         
     }
 
 
-        document.addEventListener('keypress', (e)=>{
-            if(e.keyCode == 13){
-                e.preventDefault();
-            }
-        });
+    document.addEventListener('keypress', (e)=>{
+        if(e.keyCode == 13){
+            e.preventDefault();
+        }
+    });
 
     return (
         <div>
-            <div className="logonContainer">
+            <div className="containerLogon">
 
-                <div className="logonContent">
-                    <div className="errorSpace">
-                        <p className="errorMessage" >{errorMessage}</p>
-                    </div>
-
-                    <section>
+                <div className="contentLogon">
+                    
+                    <section className="formLogon">
 
                         <form style={{transition:'.5s'}}>
 
-                            <h1>Fazer login</h1>
+                            <h1 style={{color:'#FFFFFF'}}>Fazer login</h1>
 
-                            <p style={{display:'none', fontSize:'16px', marginTop:'10px'}}>
-
+                            <p style={{display:'none', fontSize:'16px', marginTop:'10px'}}
+                               className="changeEmail">
                                 {email}
-
-                                <button onClick={handleChangeEmail}style={{marginLeft:'10px', color:'#17A100'}}>
+                                <button onClick={handleChangeEmail}style={{marginLeft:'10px', color:'#FFFFFF'}}>
                                     Alterar
-                                   
                                 </button>
                             </p>
                            
@@ -164,26 +166,43 @@ async function handleLogon(e){
                             />
                             <input type="password"
                                 placeholder="Senha"
-                                value={password}
                                 onChange={e=> setPassword(e.target.value)}
                                 className="inputPassword"
                                 style={{display: 'none',transition: '.5s', width:"1px"}}
-                                />
+                            />
 
-                            <button type="submit" onClick={handleEmailLogin} className="continue" >Continuar</button>
+                            <button type="submit"
+                             onClick={handleEmailLogin} 
+                             className="btnContinue">
+                                 Continuar
+                            </button>
 
-                            <button type="submit" onClick={handleLogon} className="login" style={{display:'none'}}>Entrar</button>
+                            <button type="submit"
+                             onClick={handleLogon}
+                              className="btnLogin"
+                               style={{display:'none'}}>
+                                   Entrar
+                            </button>
 
                             <div className="newGroup">
-                                <p>É novo por aqui?
-                                    <Link to="/register" style={{marginLeft:'10px'}}>
+                                <p style={{color:'#FFFFFF'}}>É novo por aqui?
+                                    <Link to="/register" style={{marginLeft:'10px', color:'#FFFFFF', fontWeight:'bold'}}>
                                         Cadastre-se
                                         <FiLogIn style={{verticalAlign:"text-bottom",
                                                          marginLeft:"5px",
-                                                         }} size={18} color="#17A100"/>
+                                                         }} size={18} color="black"/>
                                     </Link>
                                 </p>
 
+                            </div>
+                            <div className="messageDisplay">
+                                <p style={{width:'190px', 
+                                        lineHeight:'20px',
+                                        fontSize:'15px',
+                                        marginTop:'5px'}}>
+
+                                    {message}
+                                </p>
                             </div>
                            
                         </form> 
@@ -192,12 +211,9 @@ async function handleLogon(e){
         
                 </div>
 
+            </div>
+        
         </div>
-        
-       
-
-        </div>
-        
-        
+         
     )
 }
