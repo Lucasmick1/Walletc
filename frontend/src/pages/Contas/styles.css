@@ -16,15 +16,21 @@
 
 .conteudo {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    
 
-    margin: 5% 0;
 }
 .formAdd  {
     width: 50%;
+    display: flex;
+    justify-content: center;
+    margin: 5% 0;
+    background: linear-gradient(90deg ,rgb(27,179,49), rgb(2,98,43));
+    border-radius: 20px  0 20px 0;
+    box-shadow: 0px 0px 10px -2px black;
 }
-form {
-    width: 60%;
+.formAdd form {
+    width: 100%;
 }
 .btnGroup{
     display: flex;

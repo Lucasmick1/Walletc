@@ -120,14 +120,27 @@ export default function Profile(){
             const id = e.target.getAttribute('id');
 
             let conteudo = document.querySelector(`#C${id}`);
+            let foot = document.querySelector(`#F${id}`);
     
             if(toggleActnHeader === "true"){
                 conteudo.classList.add('contentActive');
-                e.target.setAttribute('data-toggleHeader', "false")
+                conteudo.style.position = 'absolute';
+                foot.style.position = 'absolute';
+                foot.classList.add('contentFootActive');
+                e.target.setAttribute('data-toggleHeader', "false");
+
+              
             
             }else if(toggleActnHeader === 'false'){
                 conteudo.classList.remove('contentActive');
-                e.target.setAttribute('data-toggleHeader', "true")
+                foot.classList.remove('contentFootActive');
+                
+                e.target.setAttribute('data-toggleHeader', "true");
+                setTimeout(()=>{
+                    conteudo.style.position = 'initial';
+                    foot.style.position = 'initial';
+                },650)
+                
             }
             
         }
@@ -292,7 +305,7 @@ export default function Profile(){
                                 <div className="cabecalho" data-toggleHeader="true" id={contas.id} onClick={(e)=>toggleHeader(e)}>
                                     <div className="contaInf">
                                         <p>{contas.nome}</p>
-                                        <FiDollarSign size={18} color="#17A100"/>
+                                        <FiDollarSign size={18} color="#FFFFFF"/>
                                         <p>{contas.valor}</p>
                                     </div>
                                     <div className="contaActions">
@@ -329,6 +342,9 @@ export default function Profile(){
                                         </tr>
                                     </tbody>
                                     </table>
+
+                                </div>
+                                <div className="contentFoot" id={`F${contas.id}`}>
 
                                 </div>
             

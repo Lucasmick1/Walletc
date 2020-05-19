@@ -41,13 +41,13 @@ export default function Register(){
             try{
                 await api.post('users', dados);
                 history.push('/');
-            }catch(err){
+            }catch(erro){
 
                 infoSpace.style.marginTop = '0%';
                 infoSpace.style.visibility = 'visible';
                 infoSpace.style.opacity = '1';
                 messageBox.style.display = 'block'
-                setMessage(`Erro ao cadastrar. Tente Novamente!  ${err}`);
+                setMessage(`Erro ao cadastrar. Tente Novamente!  ${erro.message}`);
                 
                 setTimeout(()=>{
                     messageBox.style.display = 'none';

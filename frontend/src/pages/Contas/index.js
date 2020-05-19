@@ -146,9 +146,7 @@ export default function AdicionaContas(){
                               />
 
             <div className="conteudo">
-                <section className="logoWalletc">
-                    <img src={logo} alt=""/>
-                </section>
+                
                 <section className="formAdd">
                     <form onSubmit={e=> handleAddConta(e)}>
                         <div className="cabecalhoAddConta">
